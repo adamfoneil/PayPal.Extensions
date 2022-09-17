@@ -25,4 +25,4 @@ app.MapPost("/IpnTest", async (HttpContext context) =>
 });
 ```
 
-Note that [this SO Q&A was helpful](https://stackoverflow.com/questions/72579605/accept-x-www-form-urlencoded-in-minimal-api-net-6) because Minimal APIs don't support `application/x-www-form-urlencoded` posts directly.
+Note that [this SO Q&A was helpful](https://stackoverflow.com/questions/72579605/accept-x-www-form-urlencoded-in-minimal-api-net-6) because Minimal APIs don't support `application/x-www-form-urlencoded` posts directly, which is what PayPal uses when posting to your IPN listener.
