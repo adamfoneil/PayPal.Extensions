@@ -10,12 +10,15 @@ var app = builder.Build();
 app.UseHttpsRedirection();
 
 // requires
-// - a stable Ngrok url to test, https://ngrok.com/
+// - an Ngrok url to test, https://ngrok.com/
 // - a PayPal account for use with https://developer.paypal.com/developer/ipnSimulator
 
 app.MapPost("/IpnTest", async (HttpContext context) =>
 {
+    // for efficient HttpClient use
     var httpClientFactory = context.RequestServices.GetRequiredService<IHttpClientFactory>();
+
+    // for emitting internal info while it runs
     var logger = context.RequestServices.GetRequiredService<ILoggerFactory>().CreateLogger("IpnTest");
 
     try
@@ -24,14 +27,15 @@ app.MapPost("/IpnTest", async (HttpContext context) =>
 
         if (result.IsVerified)
         {
+            // should be values you entered in IPN simulator form
             logger.LogInformation($"Item num: {result.Transaction.ItemNumber}, gross = {result.Transaction.Gross:c2}");
         }
     }
     catch (Exception exc)
-	{
-        // we don't exception to escape from this handler
+    {
+        // we don't want exception to escape from this handler
         logger.LogError(exc, "Error in /IpnTest handler: {message}", exc.Message);
-	}
+    }
 });
 
 app.MapGet("/", async (HttpResponse response) =>

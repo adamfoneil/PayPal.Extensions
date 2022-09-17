@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using PayPalExtensions.Models;
-using System.Net.Http;
 using System.Text.Json;
 
 namespace PayPal.Extensions
@@ -10,7 +9,7 @@ namespace PayPal.Extensions
     {
         Sandbox,
         Live
-    }    
+    }
 
     public static class PayPalExtensions
     {
@@ -27,11 +26,11 @@ namespace PayPal.Extensions
             using var client = httpClientFactory.CreateClient();
 
             try
-            {                
+            {
                 if (client.BaseAddress == null)
                 {
-                    client.BaseAddress = Urls[environment];                    
-                }                
+                    client.BaseAddress = Urls[environment];
+                }
 
                 client.DefaultRequestHeaders.Accept.Clear();
 
@@ -50,11 +49,11 @@ namespace PayPal.Extensions
                     {
                         result.Transaction = request.Form.ParseForm<PayPalTransaction>();
                     }
-                    
+
                     return result;
                 }
-                
-                throw new Exception($"PayPal API call failed: {response.Content}");                
+
+                throw new Exception($"PayPal API call failed: {response.Content}");
             }
             catch (Exception exc)
             {
