@@ -18,10 +18,10 @@ app.MapPost("/IpnTest", async (HttpContext context) =>
         }
     }
     catch (Exception exc)
-	{
+    {
         // we don't exception to escape from this handler
         logger.LogError(exc, "Error in /IpnTest handler: {message}", exc.Message);
-	}
+    }
 });
 ```
 
