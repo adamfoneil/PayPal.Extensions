@@ -19,7 +19,7 @@ app.MapPost("/IpnTest", async (HttpContext context) =>
     }
     catch (Exception exc)
     {
-        // we don't exception to escape from this handler
+        // don't let exceptions escape from IPN handler, or PayPal will keep retrying and potentially disable the callback if it keeps failing
         logger.LogError(exc, "Error in /IpnTest handler: {message}", exc.Message);
     }
 });
