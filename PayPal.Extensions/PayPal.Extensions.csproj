@@ -10,6 +10,7 @@
     <Authors>Adam O'Neil</Authors>
     <Description>Extension method for verifying PayPal transactions</Description>
     <Copyright>Copyright (c) 2022 Adam O'Neil</Copyright>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
